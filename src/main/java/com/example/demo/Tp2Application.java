@@ -1,14 +1,12 @@
 package com.example.demo;
 
-import com.example.demo.entities.Compte;
-import com.example.demo.enums.TypeCompte;
-import com.example.demo.repositories.CompteRepository;
+import com.example.demo.entities.Product;
+import com.example.demo.repositories.ProduitRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.Date;
 
 @SpringBootApplication
 public class Tp2Application {
@@ -18,14 +16,15 @@ public class Tp2Application {
 	}
 
 	@Bean
-	CommandLineRunner start(CompteRepository compteRepository){
+	CommandLineRunner start(ProduitRepository produitRepository){
 		return args->{
-			compteRepository.save(new Compte(null,98000,new Date(), TypeCompte.COURANT));
-			compteRepository.save(new Compte(null,1234,new Date(), TypeCompte.EPARGNE));
-			compteRepository.save(new Compte(null,5000,new Date(), TypeCompte.COURANT));
-			compteRepository.findAll().forEach(cp->{
-				System.out.println(cp.getType());
-				System.out.println(cp.getSolde());
+			produitRepository.save(new Product(null,"Telephone",98000,true));
+			produitRepository.save(new Product(null,"Television",2500,false));
+			produitRepository.save(new Product(null,"stylos",800,true));
+			produitRepository.findAll().forEach(cp->{
+				System.out.println(cp.getName());
+				System.out.println(cp.getPrice());
+				System.out.println(cp.getPromotion());
 			});
 
 		};
